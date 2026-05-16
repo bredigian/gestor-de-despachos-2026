@@ -3,6 +3,8 @@ from TAD_Pila import *
 from TAD_ListaEnvios import *
 from datetime import datetime
 
+from utils.datetime import obtenerFechaValidada, obtenerHoraValidada
+
 categoriasServicio = ['Express', 'Estandar', 'Internacional']
 
 def mostrarMenu():
@@ -42,14 +44,7 @@ def ejecutarAltaEnvio(listaEnvios):
         else:
             break
 
-    while True:
-        try:
-            fecha = input('Ingrese la fecha de envío (DD/MM/AAAA HH:MM): ')
-            datetime.strptime(fecha, '%d/%m/%Y %H:%M')
-
-            break
-        except ValueError:
-            print('Formato de fecha no válido. Por favor, ingrese la fecha en el formato DD/MM/AAAA HH:MM.')
+    fecha = obtenerFechaValidada('Ingrese la fecha de envío')
     
     envio = crearEnvio(id, destinatario, categoriaServicio, fecha)
     agregarEnvio(listaEnvios, envio)
@@ -91,15 +86,7 @@ def ejecutarModificacionEliminacionIndividual(listaEnvios):
                 
                 break
             case 3:
-                while True:
-                    try:
-                        nuevaFecha = input('Ingrese la nueva fecha de envío (DD/MM/AAAA HH:MM): ')
-                        datetime.strptime(nuevaFecha, '%d/%m/%Y %H:%M')
-
-                        break
-                    except ValueError:
-                        print('Formato de fecha no válido. Por favor, ingrese la fecha en el formato DD/MM/AAAA HH:MM.')
-                
+                nuevaFecha = obtenerFechaValidada('Ingrese la nueva fecha de envío')
                 modiFecha(envio, nuevaFecha)
                 print('Fecha de envío modificada exitosamente.')
 
@@ -119,33 +106,10 @@ def ejecutarActualizacionMasiva(listaEnvios):
     
     print('Por favor, ingrese el rango de fechas para la actualización masiva.')
 
-    while True:
-        try:
-            fechaInicio = input('Fecha de inicio (DD/MM/AAAA): ')
-            datetime.strptime(fechaInicio, '%d/%m/%Y')
+    fechaInicio = obtenerFechaValidada('Fecha de inicio', True)
+    fechaFin = obtenerFechaValidada('Fecha de fin', True)
 
-            break
-        except ValueError:
-            print('Formato de fecha no válido. Por favor, ingrese la fecha en el formato DD/MM/AAAA.')
-    
-    while True:
-        try:
-            fechaFin = input('Fecha de fin (DD/MM/AAAA): ')
-            datetime.strptime(fechaFin, '%d/%m/%Y')
-
-            break
-        except ValueError:
-            print('Formato de fecha no válido. Por favor, ingrese la fecha en el formato DD/MM/AAAA.')
-
-
-    while True:
-        try:
-            nuevaHoraIngreso = input('Ingrese la nueva hora de ingreso (HH:MM): ')
-            datetime.strptime(nuevaHoraIngreso, '%H:%M')
-
-            break
-        except ValueError:
-            print('Formato de hora no válido. Por favor, ingrese la hora en el formato HH:MM.')
+    nuevaHoraIngreso = obtenerHoraValidada('Ingrese la nueva hora de ingreso')
 
     for envio in listaEnvios:
         fechaInicial = datetime.strptime(fechaInicio, '%d/%m/%Y')
@@ -159,11 +123,10 @@ def ejecutarActualizacionMasiva(listaEnvios):
         
     print('Actualización masiva completada exitosamente.')
 
-
 def ejecutarVisualizacionEnvios(listaEnvios):
     print('--- Visualización de Envíos ---')
 
-    if len(listaEnvios) == 0:
+    if listaEnviosVacia(listaEnvios):
         print('No hay envíos registrados.')
         return
     
