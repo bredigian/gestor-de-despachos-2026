@@ -1,6 +1,6 @@
 from datetime import datetime
 
-def obtenerFechaValidada(mensaje, excluirHora):
+def obtenerFechaValidada(mensaje, excluirHora=False):
     while True:
         try:
             fecha = input(f'{mensaje} {"(DD/MM/AAAA)" if excluirHora else "(DD/MM/AAAA HH:MM)"}: ')

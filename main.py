@@ -14,6 +14,7 @@ def mostrarMenu():
     print('2. Modificación y Eliminación Individual')
     print('3. Visualización General')
     print('4. Actualización Masiva de Prioridad')
+    print('6. Depuración por Temporada')
     print('0. Salir')
 
 def mostrarMenuModificacionEnvio():
@@ -65,7 +66,7 @@ def ejecutarModificacionEliminacionIndividual(listaEnvios):
     while True:
         mostrarMenuModificacionEnvio()
 
-        opcion = int (input())
+        opcion = int(input())
         match opcion:
             case 1:
                 nuevoDestinatario = input('Ingrese el nuevo destinatario: ')
@@ -111,7 +112,7 @@ def ejecutarActualizacionMasiva(listaEnvios):
 
     nuevaHoraIngreso = obtenerHoraValidada('Ingrese la nueva hora de ingreso')
 
-    for envio in listaEnvios:
+    for envio in listaEnvios[:]:
         fechaInicial = datetime.strptime(fechaInicio, '%d/%m/%Y')
         fechaFinal = datetime.strptime(fechaFin, '%d/%m/%Y')
         fechaEnvio = datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M')
@@ -122,6 +123,33 @@ def ejecutarActualizacionMasiva(listaEnvios):
             modiFecha(envio, nuevaFechaEnvio.strftime('%d/%m/%Y %H:%M'))
         
     print('Actualización masiva completada exitosamente.')
+
+def ejecutarDepuracionPorTemporada(listaEnvios):
+    print('--- Depuración por Temporada ---')
+
+    if listaEnviosVacia(listaEnvios):
+        print('No hay envíos registrados. No se puede realizar la depuración por temporada.')
+
+        return
+    
+    print('Por favor, ingrese el mes que desea depurar (1-12): ')
+
+    while True:
+        try:
+            mesDepuracion = int(input())
+            if 1 <= mesDepuracion <= 12:
+                break
+            else:
+                print('Mes no válido. Por favor, ingrese un número entre 1 y 12.')
+        except ValueError:
+            print('Entrada no válida. Por favor, ingrese un número entre 1 y 12.')
+    
+    for envio in listaEnvios[:]:
+        fechaEnvio = datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M')
+        if fechaEnvio.month == mesDepuracion:
+            eliminarEnvio(listaEnvios, envio)
+    
+    print('Depuración por temporada completada exitosamente.')
 
 def ejecutarVisualizacionEnvios(listaEnvios):
     print('--- Visualización de Envíos ---')
@@ -152,6 +180,8 @@ def main():
                 ejecutarVisualizacionEnvios(listaEnvios)
             case 4:
                 ejecutarActualizacionMasiva(listaEnvios)
+            case 6:
+                ejecutarDepuracionPorTemporada(listaEnvios)
             case 0:
                 print('Saliendo del programa...')
                 break
