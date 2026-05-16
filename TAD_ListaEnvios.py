@@ -3,6 +3,9 @@ from TAD_Envio import *
 def crearListaEnvios():
     return []
 
+def listaEnviosVacia(lista):
+    return len(lista) == 0
+
 def agregarEnvio(lista, envio):
     lista.append(envio)
 
