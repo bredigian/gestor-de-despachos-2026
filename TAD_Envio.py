@@ -2,9 +2,10 @@
 # envio = [trackingID, destinatario, categoria, fecha, hora]
 #           [0]          [1]           [2]        [3]    [4]
 
-def crearEnvio():
+def crearEnvio(id, destinatario, categoria, fecha):
     #Crea un envio vacio
-    envio = ["", "", "", "", ""]
+    envio = [id, destinatario, categoria, fecha]
+    
     return envio
 
 def cargarEnvio(envio, id, destinatario, categoria, fecha, hora):
