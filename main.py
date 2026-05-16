@@ -11,6 +11,7 @@ def mostrarMenu():
     print('1. Alta de envíos')
     print('2. Modificación y Eliminación Individual')
     print('3. Visualización General')
+    print('4. Actualización Masiva de Prioridad')
     print('0. Salir')
 
 def mostrarMenuModificacionEnvio():
@@ -29,6 +30,7 @@ def ejecutarAltaEnvio(listaEnvios):
     envioExistente = buscarEnvioPorID(listaEnvios, id)
     if envioExistente is not None:
         print('Ya existe un envío con el número de seguimiento proporcionado. No se pueden agregar envíos con IDs duplicados.')
+
         return
     
     destinatario = input('Ingrese el destinatario: ')
@@ -44,6 +46,7 @@ def ejecutarAltaEnvio(listaEnvios):
         try:
             fecha = input('Ingrese la fecha de envío (DD/MM/AAAA HH:MM): ')
             datetime.strptime(fecha, '%d/%m/%Y %H:%M')
+
             break
         except ValueError:
             print('Formato de fecha no válido. Por favor, ingrese la fecha en el formato DD/MM/AAAA HH:MM.')
@@ -92,6 +95,7 @@ def ejecutarModificacionEliminacionIndividual(listaEnvios):
                     try:
                         nuevaFecha = input('Ingrese la nueva fecha de envío (DD/MM/AAAA HH:MM): ')
                         datetime.strptime(nuevaFecha, '%d/%m/%Y %H:%M')
+
                         break
                     except ValueError:
                         print('Formato de fecha no válido. Por favor, ingrese la fecha en el formato DD/MM/AAAA HH:MM.')
@@ -109,6 +113,52 @@ def ejecutarModificacionEliminacionIndividual(listaEnvios):
                 break
             case _:
                 print('Opción no válida. Por favor, seleccione una opción válida.')
+
+def ejecutarActualizacionMasiva(listaEnvios):
+    print('--- Actualización Masiva ---')
+    
+    print('Por favor, ingrese el rango de fechas para la actualización masiva.')
+
+    while True:
+        try:
+            fechaInicio = input('Fecha de inicio (DD/MM/AAAA): ')
+            datetime.strptime(fechaInicio, '%d/%m/%Y')
+
+            break
+        except ValueError:
+            print('Formato de fecha no válido. Por favor, ingrese la fecha en el formato DD/MM/AAAA.')
+    
+    while True:
+        try:
+            fechaFin = input('Fecha de fin (DD/MM/AAAA): ')
+            datetime.strptime(fechaFin, '%d/%m/%Y')
+
+            break
+        except ValueError:
+            print('Formato de fecha no válido. Por favor, ingrese la fecha en el formato DD/MM/AAAA.')
+
+
+    while True:
+        try:
+            nuevaHoraIngreso = input('Ingrese la nueva hora de ingreso (HH:MM): ')
+            datetime.strptime(nuevaHoraIngreso, '%H:%M')
+
+            break
+        except ValueError:
+            print('Formato de hora no válido. Por favor, ingrese la hora en el formato HH:MM.')
+
+    for envio in listaEnvios:
+        fechaInicial = datetime.strptime(fechaInicio, '%d/%m/%Y')
+        fechaFinal = datetime.strptime(fechaFin, '%d/%m/%Y')
+        fechaEnvio = datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M')
+
+        estaEnRango = fechaInicial <= fechaEnvio <= fechaFinal
+        if estaEnRango:
+            nuevaFechaEnvio = fechaEnvio.replace(hour=datetime.strptime(nuevaHoraIngreso, '%H:%M').hour, minute=datetime.strptime(nuevaHoraIngreso, '%H:%M').minute)
+            modiFecha(envio, nuevaFechaEnvio.strftime('%d/%m/%Y %H:%M'))
+        
+    print('Actualización masiva completada exitosamente.')
+
 
 def ejecutarVisualizacionEnvios(listaEnvios):
     print('--- Visualización de Envíos ---')
@@ -137,6 +187,8 @@ def main():
                 ejecutarModificacionEliminacionIndividual(listaEnvios)
             case 3:
                 ejecutarVisualizacionEnvios(listaEnvios)
+            case 4:
+                ejecutarActualizacionMasiva(listaEnvios)
             case 0:
                 print('Saliendo del programa...')
                 break
