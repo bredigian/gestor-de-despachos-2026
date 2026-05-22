@@ -16,7 +16,7 @@ def apilar(pila, envio):
 def desapilar(pila, pilaAux):
     # Quita y retorna el envío del tope de la pila
     envioADesapilar = pila.pop()
-    pilaAux.apilar(envioADesapilar)
+    apilar(pilaAux, envioADesapilar)
     
     return envioADesapilar
 
@@ -40,12 +40,12 @@ def pilaVacia(pila):
 def respaldar(pila, pilaAux):
     # Pasa todos los envios de pila a pilaAux (quedan en orden invertido)
     while not pilaVacia(pila):
-        apilar(pilaAux, desapilar(pila))
+        desapilar(pila, pilaAux)
 
 def restaurar(pilaAux, pila):
     # Restaura los envios desde pilaAux a pila (vuelven al orden original)
     while not pilaVacia(pilaAux):
-        apilar(pila, desapilar(pilaAux))
+        apilar(pila, desapilar(pilaAux, pila))
 
 # =========================================================
 # mostrarPila(): muestra los envíos en la pila sin modificar su orden
@@ -58,13 +58,10 @@ def mostrarPila(pila):
 
     auxiliar = crearPila()
 
-    print("\n========== PILA DE ENVÍOS ==========\n")
-
     # Desapilo mostrando y guardo en auxiliar
     while not pilaVacia(pila):
-        envio = desapilar(pila)
+        envio = desapilar(pila, auxiliar)
         mostrarEnvio(envio)
-        print("-----------------------------")
         apilar(auxiliar, envio)
 
     # Restauro la pila original
