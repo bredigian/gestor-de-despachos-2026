@@ -2,6 +2,7 @@ from TAD_Envio import *
 from TAD_Pila import *
 from TAD_ListaEnvios import *
 from datetime import datetime
+from utils.confirmAction import confirmarAccion
 
 from utils.datetime import obtenerFechaValidada, obtenerHoraValidada
 
@@ -47,7 +48,8 @@ def ejecutarAltaEnvio(listaEnvios):
 
     fecha = obtenerFechaValidada('Ingrese la fecha de envío')
     
-    envio = crearEnvio(id, destinatario, categoriaServicio, fecha)
+    envio = crearEnvio()
+    cargarEnvio(envio, id, destinatario, categoriaServicio, fecha)
     agregarEnvio(listaEnvios, envio)
 
     print('Envío agregado exitosamente.')
@@ -70,8 +72,9 @@ def ejecutarModificacionEliminacionIndividual(listaEnvios):
         match opcion:
             case 1:
                 nuevoDestinatario = input('Ingrese el nuevo destinatario: ')
-                modiDestinatario(envio, nuevoDestinatario)
-                print('Destinatario modificado exitosamente.')
+                if confirmarAccion():
+                    modiDestinatario(envio, nuevoDestinatario)
+                    print('Destinatario modificado exitosamente.')
                 
                 break
             case 2:
@@ -82,19 +85,22 @@ def ejecutarModificacionEliminacionIndividual(listaEnvios):
                     else:
                         break
 
-                modiCategoria(envio, nuevaCategoriaServicio)
-                print('Categoría del servicio modificada exitosamente.')
+                if confirmarAccion():
+                    modiCategoria(envio, nuevaCategoriaServicio)
+                    print('Categoría del servicio modificada exitosamente.')
                 
                 break
             case 3:
                 nuevaFecha = obtenerFechaValidada('Ingrese la nueva fecha de envío')
-                modiFecha(envio, nuevaFecha)
-                print('Fecha de envío modificada exitosamente.')
+                if confirmarAccion():
+                    modiFecha(envio, nuevaFecha)
+                    print('Fecha de envío modificada exitosamente.')
 
                 break
             case 4:
-                eliminarEnvio(listaEnvios, envio)
-                print('Envío eliminado exitosamente.')
+                if confirmarAccion():
+                    eliminarEnvio(listaEnvios, envio)
+                    print('Envío eliminado exitosamente.')
 
                 break
             case 0:
@@ -160,8 +166,7 @@ def ejecutarVisualizacionEnvios(listaEnvios):
     
     enviosOrdenados = sorted(listaEnvios, key=lambda envio: datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M'))
     for envio in enviosOrdenados:
-        print(f'\nID: {verID(envio)}\nDestinatario: {verDestinatario(envio)}\nCategoría del servicio: {verCategoria(envio)}\nFecha de envío: {verFecha(envio)}')
-
+        mostrarEnvio(envio)
 def main():
     print('--- Sistema de Gestión de Despachos ---')
     
