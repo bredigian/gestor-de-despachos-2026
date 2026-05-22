@@ -225,7 +225,6 @@ def main():
     listaEnvios = crearListaEnvios()
 
     if args.precarga:
-        print('Ejecutando precarga de datos de ejemplo...')
         ejecutarPrecargaDatos(listaEnvios)
 
     while True:
