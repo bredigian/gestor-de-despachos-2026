@@ -4,7 +4,7 @@
 
 def crearEnvio():
     #Crea un envio vacio
-    return []    
+    return [None, None, None, None]    
 
 def cargarEnvio(envio, id, destinatario, categoria, fecha):
     #Carga los datos de un envio
