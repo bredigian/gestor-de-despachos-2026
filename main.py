@@ -3,8 +3,13 @@ from TAD_Pila import *
 from TAD_ListaEnvios import *
 from datetime import datetime
 from utils.confirmAction import confirmarAccion
+import argparse
 
 from utils.datetime import obtenerFechaValidada, obtenerHoraValidada
+
+parser = argparse.ArgumentParser(description='Sistema de Gestión de Despachos')
+parser.add_argument('--precarga', action='store_true', help='Ejecutar precarga de datos de ejemplo')
+args = parser.parse_args()
 
 categoriasServicio = ['Express', 'Estandar', 'Internacional']
 
@@ -167,10 +172,30 @@ def ejecutarVisualizacionEnvios(listaEnvios):
     enviosOrdenados = sorted(listaEnvios, key=lambda envio: datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M'))
     for envio in enviosOrdenados:
         mostrarEnvio(envio)
+
+
+def ejecutarPrecargaDatos(listaEnvios):
+    enviosEjemplo = [
+        ['ABC123', 'Juan Pérez', 'Express', '15/04/2026 10:30'],
+        ['DEF456', 'María Gómez', 'Estandar', '20/02/2026 14:45'],
+        ['GHI789', 'Carlos López', 'Internacional', '25/04/2025 09:15'],
+        ['JKL012', 'Ana Martínez', 'Express', '30/09/2025 16:00'],
+        ['MNO345', 'Luis Rodríguez', 'Estandar', '05/10/2025 11:20']
+    ]
+
+    for envioData in enviosEjemplo:
+        envio = crearEnvio()
+        cargarEnvio(envio, verID(envioData), verDestinatario(envioData), verCategoria(envioData), verFecha(envioData))
+        agregarEnvio(listaEnvios, envio)
+
 def main():
     print('--- Sistema de Gestión de Despachos ---')
     
     listaEnvios = crearListaEnvios()
+
+    if args.precarga:
+        print('Ejecutando precarga de datos de ejemplo...')
+        ejecutarPrecargaDatos(listaEnvios)
 
     while True:
         mostrarMenu()
