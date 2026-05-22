@@ -20,6 +20,7 @@ def mostrarMenu():
     print('2. Modificación y Eliminación Individual')
     print('3. Visualización General')
     print('4. Actualización Masiva de Prioridad')
+    print('5. Generación de Pila de Despacho Prioritario')
     print('6. Depuración por Temporada')
     print('0. Salir')
 
@@ -162,6 +163,36 @@ def ejecutarDepuracionPorTemporada(listaEnvios):
     
     print('Depuración por temporada completada exitosamente.')
 
+def generacionPilaDespachoPrioritario(listaEnvios):
+    print('--- Generación de Pila de Despacho Prioritario ---')
+
+    if listaEnviosVacia(listaEnvios):
+        print('No hay envíos registrados. No se puede generar la pila de despacho prioritario.')
+        return
+
+    print('Por favor, ingrese el rango de fechas para generar la pila de despacho prioritario.')
+    fechaInicio = obtenerFechaValidada('Fecha de inicio', True)
+    fechaFin = obtenerFechaValidada('Fecha de fin', True)
+
+    pilaPrioritaria = crearPila()
+    
+    fechaInicial = datetime.strptime(fechaInicio, '%d/%m/%Y')
+    fechaFinal = datetime.strptime(fechaFin, '%d/%m/%Y')
+    
+    for envio in listaEnvios:
+        fechaEnvio = datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M')
+        
+        estaEnRango = fechaInicial <= fechaEnvio <= fechaFinal
+        if estaEnRango:
+            apilar(pilaPrioritaria, envio)
+    
+    if pilaVacia(pilaPrioritaria):
+        print('No se encontraron envíos en el rango de fechas especificado.')
+        return
+    
+    print(f'\nSe encontraron {tamanio(pilaPrioritaria)} envíos en el rango de fechas.')
+    mostrarPila(pilaPrioritaria)
+
 def ejecutarVisualizacionEnvios(listaEnvios):
     print('--- Visualización de Envíos ---')
 
@@ -210,6 +241,8 @@ def main():
                 ejecutarVisualizacionEnvios(listaEnvios)
             case 4:
                 ejecutarActualizacionMasiva(listaEnvios)
+            case 5:
+                generacionPilaDespachoPrioritario(listaEnvios)
             case 6:
                 ejecutarDepuracionPorTemporada(listaEnvios)
             case 0:
@@ -217,6 +250,5 @@ def main():
                 break
             case _:
                 print('Opción no válida. Por favor, seleccione una opción válida.')
-
 
 main()
