@@ -1,9 +1,11 @@
-def confirmarAccion():
+def confirmarAccion(mensaje):
     while True:
-        confirmar = input('¿Está seguro que desea realizar esta acción? (S/N): ').strip().upper()
+        confirmar = input(f'{mensaje}\n¿Está seguro que desea realizar esta acción? (S/N): ').strip().upper()
+        
         if(confirmar =='S'):
             return True
-        elif(confirmar == 'N'):
+
+        if(confirmar == 'N'):
             print('Acción cancelada.')
             return False
         else:

@@ -78,7 +78,7 @@ def ejecutarModificacionEliminacionIndividual(listaEnvios):
         match opcion:
             case 1:
                 nuevoDestinatario = input('Ingrese el nuevo destinatario: ')
-                if confirmarAccion():
+                if confirmarAccion(f'El destinatario se modificará de "{verDestinatario(envio)}" a "{nuevoDestinatario}".'):
                     modiDestinatario(envio, nuevoDestinatario)
                     print('Destinatario modificado exitosamente.')
                 
@@ -91,20 +91,20 @@ def ejecutarModificacionEliminacionIndividual(listaEnvios):
                     else:
                         break
 
-                if confirmarAccion():
+                if confirmarAccion(f'La categoría del servicio se modificará de "{verCategoria(envio)}" a "{nuevaCategoriaServicio}".'):
                     modiCategoria(envio, nuevaCategoriaServicio)
                     print('Categoría del servicio modificada exitosamente.')
                 
                 break
             case 3:
                 nuevaFecha = obtenerFechaValidada('Ingrese la nueva fecha de envío')
-                if confirmarAccion():
+                if confirmarAccion(f'La fecha de envío se modificará de "{verFecha(envio)}" a "{nuevaFecha}".'):
                     modiFecha(envio, nuevaFecha)
                     print('Fecha de envío modificada exitosamente.')
 
                 break
             case 4:
-                if confirmarAccion():
+                if confirmarAccion(f'El envío con ID "{verID(envio)}" será eliminado.'):
                     eliminarEnvio(listaEnvios, envio)
                     print('Envío eliminado exitosamente.')
 
@@ -132,7 +132,8 @@ def ejecutarActualizacionMasiva(listaEnvios):
         estaEnRango = fechaInicial <= fechaEnvio <= fechaFinal
         if estaEnRango:
             nuevaFechaEnvio = fechaEnvio.replace(hour=datetime.strptime(nuevaHoraIngreso, '%H:%M').hour, minute=datetime.strptime(nuevaHoraIngreso, '%H:%M').minute)
-            modiFecha(envio, nuevaFechaEnvio.strftime('%d/%m/%Y %H:%M'))
+            if confirmarAccion(f'La fecha de envío del envío con ID "{verID(envio)}" se modificará de "{verFecha(envio)}" a "{nuevaFechaEnvio.strftime("%d/%m/%Y %H:%M")}".'):
+                modiFecha(envio, nuevaFechaEnvio.strftime('%d/%m/%Y %H:%M'))
         
     print('Actualización masiva completada exitosamente.')
 
