@@ -212,7 +212,22 @@ def ejecutarPrecargaDatos(listaEnvios):
         ['DEF456', 'María Gómez', 'Estandar', '20/02/2026 14:45'],
         ['GHI789', 'Carlos López', 'Internacional', '25/04/2025 09:15'],
         ['JKL012', 'Ana Martínez', 'Express', '30/09/2025 16:00'],
-        ['MNO345', 'Luis Rodríguez', 'Estandar', '05/10/2025 11:20']
+        ['MNO345', 'Luis Rodríguez', 'Estandar', '05/10/2025 11:20'],
+        ['PQR678', 'Laura Fernández', 'Express', '12/01/2026 08:00'],
+        ['STU901', 'Ayrton Silva', 'Internacional', '18/03/2026 13:30'],
+        ['VWX234', 'Sofía Torres', 'Estandar', '22/05/2026 15:45'],
+        ['YZA567', 'Diego Ramírez', 'Express', '07/06/2025 09:00'],
+        ['BCD890', 'Ariana Sampedro', 'Internacional', '14/08/2025 17:20'],
+        ['EFG123', 'Roberto García', 'Estandar', '28/11/2025 12:10'],
+        ['HIJ456', 'Patricia Morales', 'Express', '03/12/2025 10:45'],
+        ['KLM789', 'Fernando Castro', 'Internacional', '19/01/2026 16:30'],
+        ['NOP012', 'Elena Vargas', 'Estandar', '25/03/2026 11:15'],
+        ['QRS345', 'Gianluca Bredice', 'Express', '08/04/2026 14:00'],
+        ['TUV678', 'Isabel Jiménez', 'Internacional', '17/05/2026 09:30'],
+        ['WXY901', 'Andrés Medina', 'Estandar', '21/07/2025 13:50'],
+        ['ZAB234', 'Gabriela Ortiz', 'Express', '29/08/2025 08:25'],
+        ['CDE567', 'Ricardo Navarro', 'Internacional', '10/10/2025 15:40'],
+        ['FGH890', 'Valentina Cruz', 'Estandar', '16/02/2026 12:00'],
     ]
 
     for envioData in enviosEjemplo:
