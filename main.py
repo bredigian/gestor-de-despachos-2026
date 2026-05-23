@@ -5,7 +5,7 @@ from datetime import datetime
 from utils.confirmAction import confirmarAccion
 import argparse
 
-from utils.datetime import obtenerFechaValidada, obtenerHoraValidada
+from utils.datetime import obtenerFechaFinalValidada, obtenerFechaValidada, obtenerHoraValidada
 
 parser = argparse.ArgumentParser(description='Sistema de Gestión de Despachos')
 parser.add_argument('--precarga', action='store_true', help='Ejecutar precarga de datos de ejemplo')
@@ -119,14 +119,14 @@ def ejecutarActualizacionMasiva(listaEnvios):
     
     print('Por favor, ingrese el rango de fechas para la actualización masiva.')
 
-    fechaInicio = obtenerFechaValidada('Fecha de inicio', True)
-    fechaFin = obtenerFechaValidada('Fecha de fin', True)
+    fechaInicio = obtenerFechaValidada('Fecha de inicio')
+    fechaFin = obtenerFechaFinalValidada(fechaInicio, 'Fecha de fin')
 
     nuevaHoraIngreso = obtenerHoraValidada('Ingrese la nueva hora de ingreso')
 
     for envio in listaEnvios[:]:
-        fechaInicial = datetime.strptime(fechaInicio, '%d/%m/%Y')
-        fechaFinal = datetime.strptime(fechaFin, '%d/%m/%Y')
+        fechaInicial = datetime.strptime(fechaInicio, '%d/%m/%Y %H:%M')
+        fechaFinal = datetime.strptime(fechaFin, '%d/%m/%Y %H:%M')
         fechaEnvio = datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M')
 
         estaEnRango = fechaInicial <= fechaEnvio <= fechaFinal
@@ -172,13 +172,13 @@ def generacionPilaDespachoPrioritario(listaEnvios):
         return
 
     print('Por favor, ingrese el rango de fechas para generar la pila de despacho prioritario.')
-    fechaInicio = obtenerFechaValidada('Fecha de inicio', True)
-    fechaFin = obtenerFechaValidada('Fecha de fin', True)
+    fechaInicio = obtenerFechaValidada('Fecha de inicio')
+    fechaFin = obtenerFechaFinalValidada(fechaInicio, 'Fecha de fin')
 
     pilaPrioritaria = crearPila()
     
-    fechaInicial = datetime.strptime(fechaInicio, '%d/%m/%Y')
-    fechaFinal = datetime.strptime(fechaFin, '%d/%m/%Y')
+    fechaInicial = datetime.strptime(fechaInicio, '%d/%m/%Y %H:%M')
+    fechaFinal = datetime.strptime(fechaFin, '%d/%m/%Y %H:%M')
     
     for envio in listaEnvios:
         fechaEnvio = datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M')
