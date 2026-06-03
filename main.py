@@ -3,13 +3,8 @@ from TAD_Pila import *
 from TAD_ListaEnvios import *
 from datetime import datetime
 from utils.confirmAction import confirmarAccion
-import argparse
 
 from utils.datetime import obtenerFechaFinalValidada, obtenerFechaValidada, obtenerHoraValidada
-
-parser = argparse.ArgumentParser(description='Sistema de Gestión de Despachos')
-parser.add_argument('--precarga', action='store_true', help='Ejecutar precarga de datos de ejemplo')
-args = parser.parse_args()
 
 categoriasServicio = ['Express', 'Estandar', 'Internacional']
 
@@ -240,8 +235,7 @@ def main():
     
     listaEnvios = crearListaEnvios()
 
-    if args.precarga:
-        ejecutarPrecargaDatos(listaEnvios)
+    ejecutarPrecargaDatos(listaEnvios)
 
     while True:
         mostrarMenu()
