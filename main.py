@@ -72,6 +72,8 @@ def ejecutarModificacionIndividual(listaEnvios):
 
     print('Se encontró el siguiente envío:')
     mostrarEnvio(envio)
+
+    envioModificado = False
     
     while True:
         mostrarMenuModificacionEnvio()
@@ -83,7 +85,9 @@ def ejecutarModificacionIndividual(listaEnvios):
                 if confirmarAccion(f'El destinatario se modificará de "{verDestinatario(envio)}" a "{nuevoDestinatario}".'):
                     modiDestinatario(envio, nuevoDestinatario)
                     print('\nDestinatario modificado exitosamente ✅.')
-                
+
+                    envioModificado = True
+
                 break
             case '2':
                 while True:
@@ -98,6 +102,8 @@ def ejecutarModificacionIndividual(listaEnvios):
                 if confirmarAccion(f'La categoría del servicio se modificará de "{verCategoria(envio)}" a "{nuevaCategoriaServicioMayuscula}".'):
                     modiCategoria(envio, nuevaCategoriaServicioMayuscula)
                     print('\nCategoría del servicio modificada exitosamente ✅.')
+
+                    envioModificado = True
                 
                 break
             case '3':
@@ -106,14 +112,17 @@ def ejecutarModificacionIndividual(listaEnvios):
                     modiFecha(envio, nuevaFecha)
                     print('\nFecha de envío modificada exitosamente ✅.')
 
+                    envioModificado = True
+
                 break
             case '0':
                 break
             case _:
                 print('Opción no válida. Por favor, seleccione una opción válida.')
     
-    print('El envío quedo modificado de la siguiente manera:')
-    mostrarEnvio(envio)
+    if envioModificado:
+        print('El envío quedó modificado de la siguiente manera:')
+        mostrarEnvio(envio)
 
 def ejecutarEliminacionIndividual(listaEnvios):
     print('--- Eliminación Individual ---')
@@ -129,7 +138,7 @@ def ejecutarEliminacionIndividual(listaEnvios):
     print('Se encontró el siguiente envío:')
     mostrarEnvio(envio)
     
-    if confirmarAccion(f'El envío con ID "{verID(envio)}" será eliminado.'):
+    if confirmarAccion('El envío será eliminado.'):
         eliminarEnvio(listaEnvios, envio)
         print('Envío eliminado exitosamente ✅.')
 
