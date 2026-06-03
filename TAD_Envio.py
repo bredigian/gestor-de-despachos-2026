@@ -8,7 +8,7 @@ def crearEnvio():
 
 def cargarEnvio(envio, id, destinatario, categoria, fecha):
     #Carga los datos de un envio
-    envio[0] = id
+    envio[0] = id.strip().lower()
     envio[1] = destinatario
     envio[2] = categoria
     envio[3] = fecha

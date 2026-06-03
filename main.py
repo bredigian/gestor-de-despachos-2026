@@ -35,7 +35,7 @@ def ejecutarAltaEnvio(listaEnvios):
     id = input('Ingrese el número de seguimiento (Tracking ID): ')
     envioExistente = buscarEnvioPorID(listaEnvios, id)
     if envioExistente is not None:
-        print('Ya existe un envío con el número de seguimiento proporcionado. No se pueden agregar envíos con IDs duplicados.')
+        print('Ya existe un envío con el número de seguimiento proporcionado. ❌\nNo se pueden agregar envíos con IDs duplicados.')
 
         return
     
