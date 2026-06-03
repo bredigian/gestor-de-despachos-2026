@@ -12,11 +12,12 @@ def mostrarMenu():
     print('\nSeleccione una opción:')
 
     print('1. Alta de envíos')
-    print('2. Modificación y Eliminación Individual')
-    print('3. Visualización General')
-    print('4. Actualización Masiva de Prioridad')
-    print('5. Generación de Pila de Despacho Prioritario')
-    print('6. Depuración por Temporada')
+    print('2. Modificación Individual')
+    print('3. Eliminación Individual')
+    print('4. Visualización General')
+    print('5. Actualización Masiva de Prioridad')
+    print('6. Generación de Pila de Despacho Prioritario')
+    print('7. Depuración por Temporada')
     print('0. Salir')
 
 def mostrarMenuModificacionEnvio():
@@ -55,8 +56,8 @@ def ejecutarAltaEnvio(listaEnvios):
 
     print('Envío agregado exitosamente.')
 
-def ejecutarModificacionEliminacionIndividual(listaEnvios):
-    print('--- Modificación y Eliminación Individual ---')
+def ejecutarModificacionIndividual(listaEnvios):
+    print('--- Modificación Individual ---')
     
     id = input('Ingrese el número de seguimiento (Tracking ID) del envío que desea modificar: ')
     
@@ -98,16 +99,25 @@ def ejecutarModificacionEliminacionIndividual(listaEnvios):
                     print('Fecha de envío modificada exitosamente.')
 
                 break
-            case 4:
-                if confirmarAccion(f'El envío con ID "{verID(envio)}" será eliminado.'):
-                    eliminarEnvio(listaEnvios, envio)
-                    print('Envío eliminado exitosamente.')
-
-                break
             case 0:
                 break
             case _:
                 print('Opción no válida. Por favor, seleccione una opción válida.')
+
+def ejecutarEliminacionIndividual(listaEnvios):
+    print('--- Eliminación Individual ---')
+    
+    id = input('Ingrese el número de seguimiento (Tracking ID) del envío que desea eliminar: ')
+    
+    envio = buscarEnvioPorID(listaEnvios, id)
+    if envio is None:
+        print('No se encontró ningún envío con el número de seguimiento proporcionado.')
+
+        return
+    
+    if confirmarAccion(f'El envío con ID "{verID(envio)}" será eliminado.'):
+        eliminarEnvio(listaEnvios, envio)
+        print('Envío eliminado exitosamente.')
 
 def ejecutarActualizacionMasiva(listaEnvios):
     print('--- Actualización Masiva ---')
@@ -245,14 +255,16 @@ def main():
             case 1:
                 ejecutarAltaEnvio(listaEnvios)
             case 2:
-                ejecutarModificacionEliminacionIndividual(listaEnvios)
+                ejecutarModificacionIndividual(listaEnvios)
             case 3:
-                ejecutarVisualizacionEnvios(listaEnvios)
+                ejecutarEliminacionIndividual(listaEnvios)
             case 4:
-                ejecutarActualizacionMasiva(listaEnvios)
+                ejecutarVisualizacionEnvios(listaEnvios)
             case 5:
-                generacionPilaDespachoPrioritario(listaEnvios)
+                ejecutarActualizacionMasiva(listaEnvios)
             case 6:
+                generacionPilaDespachoPrioritario(listaEnvios)
+            case 7:
                 ejecutarDepuracionPorTemporada(listaEnvios)
             case 0:
                 print('Saliendo del programa...')
