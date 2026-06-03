@@ -16,7 +16,7 @@ Agregar nuevos envíos al gestor con los siguientes campos:
 
 - **Número de Seguimiento** (Tracking ID - único)
 - **Destinatario**
-- **Categoría de Servicio** (Express, Estándar, Internacional)
+- **Categoría de Servicio** (EXPRESS, Estándar, INTERNACIONAL)
 - **Fecha de Ingreso al Depósito** (con hora)
 
 ### 2. ✏️ Modificación y Eliminación Individual

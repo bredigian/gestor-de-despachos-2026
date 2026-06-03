@@ -6,7 +6,7 @@ from utils.confirmAction import confirmarAccion
 
 from utils.datetime import obtenerFechaFinalValidada, obtenerFechaValidada, obtenerHoraValidada
 
-categoriasServicio = ['Express', 'Estandar', 'Internacional']
+categoriasServicio = ['EXPRESS', 'ESTANDAR', 'INTERNACIONAL']
 
 def mostrarMenu():
     print('\nSeleccione una opción:')
@@ -43,7 +43,7 @@ def ejecutarAltaEnvio(listaEnvios):
 
     while True:
         categoriaServicio = input(f'Ingrese la categoría del servicio ({", ".join(categoriasServicio)}): ') # "toma este string (coma-espacio) y úsalo para unir los elementos de la lista"
-        if categoriaServicio not in categoriasServicio:
+        if categoriaServicio.upper() not in categoriasServicio:
             print('Categoría de servicio no válida. Por favor, ingrese una categoría válida.')
         else:
             break
@@ -85,13 +85,15 @@ def ejecutarModificacionIndividual(listaEnvios):
             case 2:
                 while True:
                     nuevaCategoriaServicio = input(f'Ingrese la nueva categoría del servicio ({", ".join(categoriasServicio)}): ')
-                    if nuevaCategoriaServicio not in categoriasServicio:
+                    nuevaCategoriaServicioMayuscula = nuevaCategoriaServicio.upper()
+                    
+                    if nuevaCategoriaServicioMayuscula not in categoriasServicio:
                         print('Categoría de servicio no válida. Por favor, ingrese una categoría válida.')
                     else:
                         break
 
-                if confirmarAccion(f'La categoría del servicio se modificará de "{verCategoria(envio)}" a "{nuevaCategoriaServicio}".'):
-                    modiCategoria(envio, nuevaCategoriaServicio)
+                if confirmarAccion(f'La categoría del servicio se modificará de "{verCategoria(envio)}" a "{nuevaCategoriaServicioMayuscula}".'):
+                    modiCategoria(envio, nuevaCategoriaServicioMayuscula)
                     print('Categoría del servicio modificada exitosamente ✅.')
                 
                 break
@@ -229,26 +231,26 @@ def ejecutarVisualizacionEnvios(listaEnvios):
 
 def ejecutarPrecargaDatos(listaEnvios):
     enviosEjemplo = [
-        ['ABC123', 'Juan Pérez', 'Express', '15/04/2026 10:30'],
-        ['DEF456', 'María Gómez', 'Estandar', '20/02/2026 14:45'],
-        ['GHI789', 'Carlos López', 'Internacional', '25/04/2025 09:15'],
-        ['JKL012', 'Ana Martínez', 'Express', '30/09/2025 16:00'],
-        ['MNO345', 'Luis Rodríguez', 'Estandar', '05/10/2025 11:20'],
-        ['PQR678', 'Laura Fernández', 'Express', '12/01/2026 08:00'],
-        ['STU901', 'Ayrton Silva', 'Internacional', '18/03/2026 13:30'],
-        ['VWX234', 'Sofía Torres', 'Estandar', '22/05/2026 15:45'],
-        ['YZA567', 'Diego Ramírez', 'Express', '07/06/2025 09:00'],
-        ['BCD890', 'Ariana Sampedro', 'Internacional', '14/08/2025 17:20'],
-        ['EFG123', 'Roberto García', 'Estandar', '28/11/2025 12:10'],
-        ['HIJ456', 'Patricia Morales', 'Express', '03/12/2025 10:45'],
-        ['KLM789', 'Fernando Castro', 'Internacional', '19/01/2026 16:30'],
-        ['NOP012', 'Elena Vargas', 'Estandar', '25/03/2026 11:15'],
-        ['QRS345', 'Gianluca Bredice', 'Express', '08/04/2026 14:00'],
-        ['TUV678', 'Isabel Jiménez', 'Internacional', '17/05/2026 09:30'],
-        ['WXY901', 'Andrés Medina', 'Estandar', '21/07/2025 13:50'],
-        ['ZAB234', 'Gabriela Ortiz', 'Express', '29/08/2025 08:25'],
-        ['CDE567', 'Ricardo Navarro', 'Internacional', '10/10/2025 15:40'],
-        ['FGH890', 'Valentina Cruz', 'Estandar', '16/02/2026 12:00'],
+        ['ABC123', 'Juan Pérez', 'EXPRESS', '15/04/2026 10:30'],
+        ['DEF456', 'María Gómez', 'ESTANDAR', '20/02/2026 14:45'],
+        ['GHI789', 'Carlos López', 'INTERNACIONAL', '25/04/2025 09:15'],
+        ['JKL012', 'Ana Martínez', 'EXPRESS', '30/09/2025 16:00'],
+        ['MNO345', 'Luis Rodríguez', 'ESTANDAR', '05/10/2025 11:20'],
+        ['PQR678', 'Laura Fernández', 'EXPRESS', '12/01/2026 08:00'],
+        ['STU901', 'Ayrton Silva', 'INTERNACIONAL', '18/03/2026 13:30'],
+        ['VWX234', 'Sofía Torres', 'ESTANDAR', '22/05/2026 15:45'],
+        ['YZA567', 'Diego Ramírez', 'EXPRESS', '07/06/2025 09:00'],
+        ['BCD890', 'Ariana Sampedro', 'INTERNACIONAL', '14/08/2025 17:20'],
+        ['EFG123', 'Roberto García', 'ESTANDAR', '28/11/2025 12:10'],
+        ['HIJ456', 'Patricia Morales', 'EXPRESS', '03/12/2025 10:45'],
+        ['KLM789', 'Fernando Castro', 'INTERNACIONAL', '19/01/2026 16:30'],
+        ['NOP012', 'Elena Vargas', 'ESTANDAR', '25/03/2026 11:15'],
+        ['QRS345', 'Gianluca Bredice', 'EXPRESS', '08/04/2026 14:00'],
+        ['TUV678', 'Isabel Jiménez', 'INTERNACIONAL', '17/05/2026 09:30'],
+        ['WXY901', 'Andrés Medina', 'ESTANDAR', '21/07/2025 13:50'],
+        ['ZAB234', 'Gabriela Ortiz', 'EXPRESS', '29/08/2025 08:25'],
+        ['CDE567', 'Ricardo Navarro', 'INTERNACIONAL', '10/10/2025 15:40'],
+        ['FGH890', 'Valentina Cruz', 'ESTANDAR', '16/02/2026 12:00'],
     ]
 
     for envioData in enviosEjemplo:
