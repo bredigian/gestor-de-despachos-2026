@@ -54,7 +54,7 @@ def ejecutarAltaEnvio(listaEnvios):
     cargarEnvio(envio, id, destinatario, categoriaServicio, fecha)
     agregarEnvio(listaEnvios, envio)
 
-    print('Envío agregado exitosamente.')
+    print('Envío agregado exitosamente ✅.')
 
 def ejecutarModificacionIndividual(listaEnvios):
     print('--- Modificación Individual ---')
@@ -66,6 +66,9 @@ def ejecutarModificacionIndividual(listaEnvios):
         print('No se encontró ningún envío con el número de seguimiento proporcionado.')
 
         return
+
+    print('Se encontró el siguiente envío:')
+    mostrarEnvio(envio)
     
     while True:
         mostrarMenuModificacionEnvio()
@@ -76,7 +79,7 @@ def ejecutarModificacionIndividual(listaEnvios):
                 nuevoDestinatario = input('Ingrese el nuevo destinatario: ')
                 if confirmarAccion(f'El destinatario se modificará de "{verDestinatario(envio)}" a "{nuevoDestinatario}".'):
                     modiDestinatario(envio, nuevoDestinatario)
-                    print('Destinatario modificado exitosamente.')
+                    print('Destinatario modificado exitosamente ✅.')
                 
                 break
             case 2:
@@ -89,14 +92,14 @@ def ejecutarModificacionIndividual(listaEnvios):
 
                 if confirmarAccion(f'La categoría del servicio se modificará de "{verCategoria(envio)}" a "{nuevaCategoriaServicio}".'):
                     modiCategoria(envio, nuevaCategoriaServicio)
-                    print('Categoría del servicio modificada exitosamente.')
+                    print('Categoría del servicio modificada exitosamente ✅.')
                 
                 break
             case 3:
                 nuevaFecha = obtenerFechaValidada('Ingrese la nueva fecha de envío')
                 if confirmarAccion(f'La fecha de envío se modificará de "{verFecha(envio)}" a "{nuevaFecha}".'):
                     modiFecha(envio, nuevaFecha)
-                    print('Fecha de envío modificada exitosamente.')
+                    print('Fecha de envío modificada exitosamente ✅.')
 
                 break
             case 0:
@@ -114,10 +117,14 @@ def ejecutarEliminacionIndividual(listaEnvios):
         print('No se encontró ningún envío con el número de seguimiento proporcionado.')
 
         return
+
+    print('Se encontró el siguiente envío:')
+    mostrarEnvio(envio)
+    print('')
     
     if confirmarAccion(f'El envío con ID "{verID(envio)}" será eliminado.'):
         eliminarEnvio(listaEnvios, envio)
-        print('Envío eliminado exitosamente.')
+        print('Envío eliminado exitosamente ✅.')
 
 def ejecutarActualizacionMasiva(listaEnvios):
     print('--- Actualización Masiva ---')
@@ -140,7 +147,7 @@ def ejecutarActualizacionMasiva(listaEnvios):
             if confirmarAccion(f'La fecha de envío del envío con ID "{verID(envio)}" se modificará de "{verFecha(envio)}" a "{nuevaFechaEnvio.strftime("%d/%m/%Y %H:%M")}".'):
                 modiFecha(envio, nuevaFechaEnvio.strftime('%d/%m/%Y %H:%M'))
         
-    print('Actualización masiva completada exitosamente.')
+    print('Actualización masiva completada exitosamente ✅.')
 
 def ejecutarDepuracionPorTemporada(listaEnvios):
     print('--- Depuración por Temporada ---')
@@ -167,7 +174,7 @@ def ejecutarDepuracionPorTemporada(listaEnvios):
         if fechaEnvio.month == mesDepuracion:
             eliminarEnvio(listaEnvios, envio)
     
-    print('Depuración por temporada completada exitosamente.')
+    print('Depuración por temporada completada exitosamente ✅.')
 
 def generacionPilaDespachoPrioritario(listaEnvios):
     print('--- Generación de Pila de Despacho Prioritario ---')
