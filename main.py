@@ -54,7 +54,11 @@ def ejecutarAltaEnvio(listaEnvios):
     cargarEnvio(envio, id, destinatario, categoriaServicio, fecha)
     agregarEnvio(listaEnvios, envio)
 
-    print('Envío agregado exitosamente ✅.')
+    print('\nEl siguiente envío fue agregado exitosamente ✅:')
+    mostrarEnvio(envio)
+
+    input('Presione Enter para continuar...')
+
 
 def ejecutarModificacionIndividual(listaEnvios):
     print('--- Modificación Individual ---')
@@ -122,7 +126,6 @@ def ejecutarEliminacionIndividual(listaEnvios):
 
     print('Se encontró el siguiente envío:')
     mostrarEnvio(envio)
-    print('')
     
     if confirmarAccion(f'El envío con ID "{verID(envio)}" será eliminado.'):
         eliminarEnvio(listaEnvios, envio)

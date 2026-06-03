@@ -43,5 +43,5 @@ def modiFecha(envio, f):
 
 def mostrarEnvio(envio):
     #Muestra todos los datos de un envio
-    print(f'\nID: {verID(envio)}\nDestinatario: {verDestinatario(envio)}\nCategoría del servicio: {verCategoria(envio)}\nFecha de envío: {verFecha(envio)}')
+    print(f'\nID: {verID(envio)}\nDestinatario: {verDestinatario(envio)}\nCategoría del servicio: {verCategoria(envio)}\nFecha de envío: {verFecha(envio)}\n')
 
