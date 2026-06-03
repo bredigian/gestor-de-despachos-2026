@@ -181,7 +181,8 @@ def ejecutarDepuracionPorTemporada(listaEnvios):
     for envio in listaEnvios[:]:
         fechaEnvio = datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M')
         if fechaEnvio.month == mesDepuracion:
-            eliminarEnvio(listaEnvios, envio)
+            if confirmarAccion(f'El envío con ID "{verID(envio)}" se eliminará.'):
+                eliminarEnvio(listaEnvios, envio)
     
     print('Depuración por temporada completada exitosamente ✅.')
 
