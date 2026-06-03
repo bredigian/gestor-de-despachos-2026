@@ -14,7 +14,7 @@ def agregarEnvio(lista, envio):
 def buscarEnvioPorID(lista, id):
     for envio in lista:
         envioId = verID(envio)
-        if envioId == id:
+        if envioId.lower() == id.lower():
             return envio
     return None
 
