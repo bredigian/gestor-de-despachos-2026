@@ -9,7 +9,7 @@ from utils.datetime import obtenerFechaFinalValidada, obtenerFechaValidada, obte
 categoriasServicio = ['EXPRESS', 'ESTANDAR', 'INTERNACIONAL']
 
 def mostrarMenu():
-    print('\nSeleccione una opción:')
+    print('\nEstas son las opciones disponibles. Por favor, seleccione una opción para continuar:')
 
     print('1. Alta de envíos')
     print('2. Modificación Individual')
@@ -59,7 +59,6 @@ def ejecutarAltaEnvio(listaEnvios):
 
     input('Presione Enter para continuar...')
 
-
 def ejecutarModificacionIndividual(listaEnvios):
     print('--- Modificación Individual ---')
     
@@ -83,7 +82,7 @@ def ejecutarModificacionIndividual(listaEnvios):
                 nuevoDestinatario = input('Ingrese el nuevo destinatario: ')
                 if confirmarAccion(f'El destinatario se modificará de "{verDestinatario(envio)}" a "{nuevoDestinatario}".'):
                     modiDestinatario(envio, nuevoDestinatario)
-                    print('Destinatario modificado exitosamente ✅.')
+                    print('\nDestinatario modificado exitosamente ✅.')
                 
                 break
             case 2:
@@ -98,20 +97,23 @@ def ejecutarModificacionIndividual(listaEnvios):
 
                 if confirmarAccion(f'La categoría del servicio se modificará de "{verCategoria(envio)}" a "{nuevaCategoriaServicioMayuscula}".'):
                     modiCategoria(envio, nuevaCategoriaServicioMayuscula)
-                    print('Categoría del servicio modificada exitosamente ✅.')
+                    print('\nCategoría del servicio modificada exitosamente ✅.')
                 
                 break
             case 3:
                 nuevaFecha = obtenerFechaValidada('Ingrese la nueva fecha de envío')
                 if confirmarAccion(f'La fecha de envío se modificará de "{verFecha(envio)}" a "{nuevaFecha}".'):
                     modiFecha(envio, nuevaFecha)
-                    print('Fecha de envío modificada exitosamente ✅.')
+                    print('\nFecha de envío modificada exitosamente ✅.')
 
                 break
             case 0:
                 break
             case _:
                 print('Opción no válida. Por favor, seleccione una opción válida.')
+    
+    print('El envío quedo modificado de la siguiente manera:')
+    mostrarEnvio(envio)
 
 def ejecutarEliminacionIndividual(listaEnvios):
     print('--- Eliminación Individual ---')
