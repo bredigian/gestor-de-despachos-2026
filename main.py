@@ -26,7 +26,6 @@ def mostrarMenuModificacionEnvio():
     print('1. Modificar destinatario')
     print('2. Modificar categoría del servicio')
     print('3. Modificar fecha de envío')
-    print('4. Eliminar envío')
     print('0. Volver al menú principal')
 
 def ejecutarAltaEnvio(listaEnvios):
