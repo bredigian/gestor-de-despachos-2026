@@ -223,8 +223,7 @@ def ejecutarVisualizacionEnvios(listaEnvios):
         print('No hay envíos registrados.')
         return
     
-    enviosOrdenados = sorted(listaEnvios, key=lambda envio: datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M'))
-    for envio in enviosOrdenados:
+    for envio in listaEnvios:
         mostrarEnvio(envio)
 
 
