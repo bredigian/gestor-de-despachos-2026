@@ -136,6 +136,8 @@ def ejecutarActualizacionMasiva(listaEnvios):
 
     nuevaHoraIngreso = obtenerHoraValidada('Ingrese la nueva hora de ingreso')
 
+    modificacionesRealizadas = False
+
     for envio in listaEnvios[:]:
         fechaInicial = datetime.strptime(fechaInicio, '%d/%m/%Y %H:%M')
         fechaFinal = datetime.strptime(fechaFin, '%d/%m/%Y %H:%M')
@@ -143,11 +145,18 @@ def ejecutarActualizacionMasiva(listaEnvios):
 
         estaEnRango = fechaInicial <= fechaEnvio <= fechaFinal
         if estaEnRango:
-            nuevaFechaEnvio = fechaEnvio.replace(hour=datetime.strptime(nuevaHoraIngreso, '%H:%M').hour, minute=datetime.strptime(nuevaHoraIngreso, '%H:%M').minute)
+            modificacionesRealizadas = True
+
+            nuevaHoraIngresoDatetime = datetime.strptime(nuevaHoraIngreso, '%H:%M')
+            nuevaFechaEnvio = fechaEnvio.replace(hour=nuevaHoraIngresoDatetime.hour, minute=nuevaHoraIngresoDatetime.minute)
+            
             if confirmarAccion(f'La fecha de envío del envío con ID "{verID(envio)}" se modificará de "{verFecha(envio)}" a "{nuevaFechaEnvio.strftime("%d/%m/%Y %H:%M")}".'):
                 modiFecha(envio, nuevaFechaEnvio.strftime('%d/%m/%Y %H:%M'))
         
-    print('Actualización masiva completada exitosamente ✅.')
+    if modificacionesRealizadas:
+        print('Actualización masiva completada exitosamente ✅.')
+    else:
+        print('No se realizaron modificaciones en el rango de fechas especificado porque no se encontraron envíos dentro del rango de fechas indicado.')
 
 def ejecutarDepuracionPorTemporada(listaEnvios):
     print('--- Depuración por Temporada ---')
