@@ -76,16 +76,16 @@ def ejecutarModificacionIndividual(listaEnvios):
     while True:
         mostrarMenuModificacionEnvio()
 
-        opcion = int(input())
+        opcion = input()
         match opcion:
-            case 1:
+            case '1':
                 nuevoDestinatario = input('Ingrese el nuevo destinatario: ')
                 if confirmarAccion(f'El destinatario se modificará de "{verDestinatario(envio)}" a "{nuevoDestinatario}".'):
                     modiDestinatario(envio, nuevoDestinatario)
                     print('\nDestinatario modificado exitosamente ✅.')
                 
                 break
-            case 2:
+            case '2':
                 while True:
                     nuevaCategoriaServicio = input(f'Ingrese la nueva categoría del servicio ({", ".join(categoriasServicio)}): ')
                     nuevaCategoriaServicioMayuscula = nuevaCategoriaServicio.upper()
@@ -100,14 +100,14 @@ def ejecutarModificacionIndividual(listaEnvios):
                     print('\nCategoría del servicio modificada exitosamente ✅.')
                 
                 break
-            case 3:
+            case '3':
                 nuevaFecha = obtenerFechaValidada('Ingrese la nueva fecha de envío')
                 if confirmarAccion(f'La fecha de envío se modificará de "{verFecha(envio)}" a "{nuevaFecha}".'):
                     modiFecha(envio, nuevaFecha)
                     print('\nFecha de envío modificada exitosamente ✅.')
 
                 break
-            case 0:
+            case '0':
                 break
             case _:
                 print('Opción no válida. Por favor, seleccione una opción válida.')
@@ -273,23 +273,23 @@ def main():
     while True:
         mostrarMenu()
         
-        opcion = int(input())
+        opcion = input()
         match opcion:
-            case 1:
+            case '1':
                 ejecutarAltaEnvio(listaEnvios)
-            case 2:
+            case '2':
                 ejecutarModificacionIndividual(listaEnvios)
-            case 3:
+            case '3':
                 ejecutarEliminacionIndividual(listaEnvios)
-            case 4:
+            case '4':
                 ejecutarVisualizacionEnvios(listaEnvios)
-            case 5:
+            case '5':
                 ejecutarActualizacionMasiva(listaEnvios)
-            case 6:
+            case '6':
                 generacionPilaDespachoPrioritario(listaEnvios)
-            case 7:
+            case '7':
                 ejecutarDepuracionPorTemporada(listaEnvios)
-            case 0:
+            case '0':
                 print('Saliendo del programa...')
                 break
             case _:
