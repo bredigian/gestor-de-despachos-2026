@@ -275,6 +275,27 @@ def ejecutarPrecargaDatos(listaEnvios):
         ['ZAB234', 'Gabriela Ortiz', 'EXPRESS', '29/08/2025 08:25'],
         ['CDE567', 'Ricardo Navarro', 'INTERNACIONAL', '10/10/2025 15:40'],
         ['FGH890', 'Valentina Cruz', 'ESTANDAR', '16/02/2026 12:00'],
+        ['LMN135', 'Tomás Herrera', 'EXPRESS', '02/05/2026 09:45'],
+        ['OPQ246', 'Camila Rojas', 'ESTANDAR', '11/06/2026 14:20'],
+        ['RST357', 'Martín Suárez', 'INTERNACIONAL', '27/07/2025 10:10'],
+        ['UVW468', 'Julieta Acosta', 'EXPRESS', '05/08/2025 16:35'],
+        ['XYZ579', 'Nicolás Benítez', 'ESTANDAR', '13/09/2025 11:50'],
+        ['ACE680', 'Florencia Duarte', 'INTERNACIONAL', '24/10/2025 08:40'],
+        ['BDF791', 'Matías Cabrera', 'EXPRESS', '06/11/2025 15:25'],
+        ['CEG802', 'Milagros Ponce', 'ESTANDAR', '18/12/2025 12:55'],
+        ['DFH913', 'Joaquín Molina', 'INTERNACIONAL', '09/01/2026 17:10'],
+        ['EGI024', 'Agustina Vega', 'EXPRESS', '22/02/2026 10:20'],
+        ['FHJ135', 'Bruno Peralta', 'ESTANDAR', '04/03/2026 13:15'],
+        ['GIK246', 'Lucía Salazar', 'INTERNACIONAL', '15/04/2026 18:05'],
+        ['HJL357', 'Federico Luna', 'EXPRESS', '28/05/2026 09:35'],
+        ['IKM468', 'Victoria Campos', 'ESTANDAR', '10/06/2025 14:50'],
+        ['JLN579', 'Santiago Núñez', 'INTERNACIONAL', '21/07/2025 11:05'],
+        ['KMO680', 'Carolina Ferreyra', 'EXPRESS', '03/08/2025 16:15'],
+        ['LNP791', 'Emiliano Quiroga', 'ESTANDAR', '14/09/2025 08:55'],
+        ['MOQ802', 'Daniela Aguirre', 'INTERNACIONAL', '26/10/2025 13:40'],
+        ['NPR913', 'Gonzalo Villalba', 'EXPRESS', '07/12/2025 15:30'],
+        ['OQS024', 'Natalia Figueroa', 'ESTANDAR', '19/01/2026 10:05']
+
     ]
 
     for envioData in enviosEjemplo:
