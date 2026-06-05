@@ -123,6 +123,9 @@ def ejecutarModificacionIndividual(listaEnvios):
         print('El envío quedó modificado de la siguiente manera:')
         mostrarEnvio(envio)
 
+    input('Presione Enter para continuar...')
+
+
 def ejecutarEliminacionIndividual(listaEnvios):
     print('--- Eliminación Individual ---')
     
@@ -140,6 +143,8 @@ def ejecutarEliminacionIndividual(listaEnvios):
     if confirmarAccion('El envío será eliminado.'):
         eliminarEnvio(listaEnvios, envio)
         print('Envío eliminado exitosamente ✅.')
+    
+    input('Presione Enter para continuar...')
 
 def ejecutarActualizacionMasiva(listaEnvios):
     print('--- Actualización Masiva ---')
@@ -172,6 +177,8 @@ def ejecutarActualizacionMasiva(listaEnvios):
         print('Actualización masiva completada exitosamente ✅.')
     else:
         print('No se realizaron modificaciones en el rango de fechas especificado porque no se encontraron envíos dentro del rango de fechas indicado.')
+    
+    input('Presione Enter para continuar...')
 
 def ejecutarDepuracionPorTemporada(listaEnvios):
     print('--- Depuración por Temporada ---')
@@ -200,6 +207,7 @@ def ejecutarDepuracionPorTemporada(listaEnvios):
                 eliminarEnvio(listaEnvios, envio)
     
     print('Depuración por temporada completada exitosamente ✅.')
+    input('Presione Enter para continuar...')
 
 def generacionPilaDespachoPrioritario(listaEnvios):
     print('--- Generación de Pila de Despacho Prioritario ---')
@@ -231,6 +239,8 @@ def generacionPilaDespachoPrioritario(listaEnvios):
     print(f'\nSe encontraron {tamanio(pilaPrioritaria)} envíos en el rango de fechas.')
     mostrarPila(pilaPrioritaria)
 
+    input('Presione Enter para continuar...')
+
 def ejecutarVisualizacionEnvios(listaEnvios):
     print('--- Visualización de Envíos ---')
 
@@ -241,6 +251,7 @@ def ejecutarVisualizacionEnvios(listaEnvios):
     for envio in listaEnvios:
         mostrarEnvio(envio)
 
+    input('Presione Enter para continuar...')
 
 def ejecutarPrecargaDatos(listaEnvios):
     enviosEjemplo = [
