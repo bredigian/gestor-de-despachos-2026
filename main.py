@@ -7,6 +7,7 @@ from utils.confirmarAccion import confirmarAccion
 from utils.datetime import obtenerFechaFinalValidada, obtenerFechaValidada, obtenerHoraValidada
 
 categoriasServicio = ['EXPRESS', 'ESTANDAR', 'INTERNACIONAL']
+categoriasServicioConcatenado = ', '.join(categoriasServicio) # "toma este string (coma-espacio) y úsalo para unir los elementos de la lista"
 
 def mostrarMenu():
     print('\nEstas son las opciones disponibles. Por favor, seleccione una opción para continuar:')
@@ -41,7 +42,7 @@ def ejecutarAltaEnvio(listaEnvios):
     destinatario = input('Ingrese el destinatario: ')
 
     while True:
-        categoriaServicio = input(f'Ingrese la categoría del servicio ({", ".join(categoriasServicio)}): ') # "toma este string (coma-espacio) y úsalo para unir los elementos de la lista"
+        categoriaServicio = input(f'Ingrese la categoría del servicio ({categoriasServicioConcatenado}): ') # "toma este string (coma-espacio) y úsalo para unir los elementos de la lista"
         if categoriaServicio.upper() not in categoriasServicio:
             print('Categoría de servicio no válida. Por favor, ingrese una categoría válida.')
         else:
@@ -90,7 +91,7 @@ def ejecutarModificacionIndividual(listaEnvios):
                 break
             case '2':
                 while True:
-                    nuevaCategoriaServicio = input(f'Ingrese la nueva categoría del servicio ({", ".join(categoriasServicio)}): ')
+                    nuevaCategoriaServicio = input(f'Ingrese la nueva categoría del servicio ({categoriasServicioConcatenado}): ')
                     nuevaCategoriaServicioMayuscula = nuevaCategoriaServicio.upper()
                     
                     if nuevaCategoriaServicioMayuscula not in categoriasServicio:
