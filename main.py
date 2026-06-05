@@ -295,7 +295,6 @@ def ejecutarPrecargaDatos(listaEnvios):
         ['MOQ802', 'Daniela Aguirre', 'INTERNACIONAL', '26/10/2025 13:40'],
         ['NPR913', 'Gonzalo Villalba', 'EXPRESS', '07/12/2025 15:30'],
         ['OQS024', 'Natalia Figueroa', 'ESTANDAR', '19/01/2026 10:05']
-
     ]
 
     for envioData in enviosEjemplo:
