@@ -20,10 +20,6 @@ def desapilar(pila, pilaAux):
     
     return envioADesapilar
 
-def tope(pila):
-    # Retorna el envío del tope sin sacarlo
-    return pila[-1]
-
 def tamanio(pila):
     # Retorna la cantidad de envíos en la pila
     return len(pila)
@@ -33,14 +29,8 @@ def pilaVacia(pila):
     return tamanio(pila) == 0
 
 # =========================================================
-# respaldar(): copia todos los elementos de pila en pilaAux
 # restaurar(): copia todos los elementos de pilaAux de vuelta a pila
 # =========================================================
-
-def respaldar(pila, pilaAux):
-    # Pasa todos los envios de pila a pilaAux (quedan en orden invertido)
-    while not pilaVacia(pila):
-        desapilar(pila, pilaAux)
 
 def restaurar(pilaAux, pila):
     # Restaura los envios desde pilaAux a pila (vuelven al orden original)
