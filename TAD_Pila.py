@@ -12,7 +12,7 @@ def crearPila():
 
 def pilaVacia(pila):
     # Retorna True si la pila está vacía, False si no
-    return len(pila)==0
+    return tamanio(pila)==0
 
 
 def apilar(pila,elemento):
@@ -29,23 +29,7 @@ def tamanio(pila):
     # Retorna la cantidad de envíos en la pila
     return len(pila)
 
-
-def mostrarPila(pila):
-    if pilaVacia(pila):
-        print("\nLa pila está vacía.")
-        return
-
-    auxiliar = crearPila()
-
-    # Desapilo mostrando y guardo en auxiliar
-    while not pilaVacia(pila):
-        envio = desapilar(pila)
-        mostrarEnvio(envio)
-        print("-----------------------------")
-        apilar(auxiliar, envio)
-
-
-def copiarPila(pila,pila2):
+def copiarPila(pila, pila2):
     # Copia los datos de la pila 2 a la pila
     auxiliar = crearPila()
 
@@ -55,4 +39,3 @@ def copiarPila(pila,pila2):
     while not pilaVacia(auxiliar):
         envio = desapilar(auxiliar)
         apilar(pila,envio)
-        apilar(pila2,envio)

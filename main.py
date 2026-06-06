@@ -3,6 +3,8 @@ from TAD_Pila import *
 from TAD_ListaEnvios import *
 from datetime import datetime
 from utils.confirmarAccion import confirmarAccion
+from utils.mostrarEnvio import mostrarEnvio
+from utils.buscarEnvioPorID import buscarEnvioPorID
 
 from utils.datetime import obtenerFechaFinalValidada, obtenerFechaValidada, obtenerHoraValidada
 
@@ -126,7 +128,6 @@ def ejecutarModificacionIndividual(listaEnvios):
 
     input('Presione Enter para continuar...')
 
-
 def ejecutarEliminacionIndividual(listaEnvios):
     print('--- Eliminación Individual ---')
     
@@ -159,7 +160,9 @@ def ejecutarActualizacionMasiva(listaEnvios):
 
     modificacionesRealizadas = False
 
-    for envio in listaEnvios[:]:
+    for idx in range(tamanioLista(listaEnvios)):
+        envio = recuperarEnvio(listaEnvios, idx)
+
         fechaInicial = datetime.strptime(fechaInicio, '%d/%m/%Y %H:%M')
         fechaFinal = datetime.strptime(fechaFin, '%d/%m/%Y %H:%M')
         fechaEnvio = datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M')
@@ -201,12 +204,22 @@ def ejecutarDepuracionPorTemporada(listaEnvios):
         except ValueError:
             print('Entrada no válida. Por favor, ingrese un número entre 1 y 12.')
     
-    for envio in listaEnvios[:]:
+    i=0
+    tamano=tamanioLista(listaEnvios)
+
+    while i < tamano:
+        envio = recuperarEnvio(listaEnvios, i)
+
         fechaEnvio = datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M')
         if fechaEnvio.month == mesDepuracion:
             if confirmarAccion(f'El envío con ID "{verID(envio)}" se eliminará.'):
                 eliminarEnvio(listaEnvios, envio)
-    
+                tamano-=1
+            else:
+                i+=1
+        else:
+            i+=1
+
     print('Depuración por temporada completada exitosamente ✅.')
     input('Presione Enter para continuar...')
 
@@ -226,9 +239,10 @@ def generacionPilaDespachoPrioritario(listaEnvios):
     fechaInicial = datetime.strptime(fechaInicio, '%d/%m/%Y %H:%M')
     fechaFinal = datetime.strptime(fechaFin, '%d/%m/%Y %H:%M')
     
-    for envio in listaEnvios:
+    for idx in range(tamanioLista(listaEnvios)):
+        envio = recuperarEnvio(listaEnvios, idx)
+
         fechaEnvio = datetime.strptime(verFecha(envio), '%d/%m/%Y %H:%M')
-        
         estaEnRango = fechaInicial <= fechaEnvio <= fechaFinal
         if estaEnRango:
             apilar(pilaPrioritaria, envio)
@@ -238,7 +252,12 @@ def generacionPilaDespachoPrioritario(listaEnvios):
         return
     
     print(f'\nSe encontraron {tamanio(pilaPrioritaria)} envíos en el rango de fechas.')
-    mostrarPila(pilaPrioritaria)
+
+    while not pilaVacia(pilaPrioritaria):
+        envio = desapilar(pilaPrioritaria)
+        mostrarEnvio(envio)
+
+        print("-----------------------------")
 
     input('Presione Enter para continuar...')
 
@@ -249,7 +268,8 @@ def ejecutarVisualizacionEnvios(listaEnvios):
         print('No hay envíos registrados.')
         return
     
-    for envio in listaEnvios:
+    for idx in range(tamanioLista(listaEnvios)):
+        envio = recuperarEnvio(listaEnvios, idx)
         mostrarEnvio(envio)
 
     input('Presione Enter para continuar...')
